@@ -3,17 +3,22 @@
   "version": "1.0.0",
   "description": "Deck created with mdx-deck",
   "scripts": {
-    "start": "mdx-deck deck.mdx",
-    "build": "mdx-deck build deck.mdx",
-    "pdf": "mdx-deck pdf deck.mdx",
-    "image": "mdx-deck screenshot deck.mdx",
+    "start": "mdx-deck deck.js",
+    "build": "mdx-deck build deck.js --no-html",
+    "postbuild": "cp -r assets dist",
+    "pdf": "mdx-deck pdf deck.js",
+    "image": "mdx-deck screenshot deck.js",
     "help": "mdx-deck"
   },
   "keywords": [],
   "author": "Brent Jackson",
   "license": "MIT",
   "devDependencies": {
-    "mdx-deck": "^1.6.7"
+    "mdx-code": "^1.1.3",
+    "mdx-deck": "^1.6.7",
+    "mdx-deck-code-surfer": "^0.5.5",
+    "mdx-deck-live-code": "^1.0.0",
+    "raw-loader": "^1.0.0"
   },
   "name": "meetup"
 }

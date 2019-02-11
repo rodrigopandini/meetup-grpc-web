@@ -1,12 +1,30 @@
-import theme from 'mdx-deck/themes'
+// example theme.js
+import { dark as theme } from 'mdx-deck/themes'
+import vs from 'react-syntax-highlighter/styles/prism/vs'
+import prismGo from 'react-syntax-highlighter/languages/prism/go'
+import prismProtobuf from 'react-syntax-highlighter/languages/prism/protobuf'
+import vsDark from "prism-react-renderer/themes/vsDark"
 
 export default {
   ...theme,
-
-  // Customize your presentation theme here.
-  //
-  // Read the docs for more info:
-  // https://github.com/jxnblk/mdx-deck/blob/master/docs/theming.md
-  // https://github.com/jxnblk/mdx-deck/blob/master/docs/themes.md
-
+  font: 'Roboto, sans-serif',
+  colors: {
+    ...theme.colors,
+    background: '#333',
+    link: '#0ff',
+  },  
+  blockquote: {
+    fontStyle: 'italic'
+  },
+  prism: {
+    style: vs,
+    languages: {
+      go: prismGo,
+      protobuf: prismProtobuf
+    }
+  },
+  codeSurfer: {
+    ...vsDark,
+    showNumbers: false
+  }
 }

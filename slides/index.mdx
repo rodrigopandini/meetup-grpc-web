@@ -1,0 +1,464 @@
+import Code from 'mdx-code';
+import { Appear } from 'mdx-deck'
+import { Head } from 'mdx-deck'
+import { Image } from 'mdx-deck'
+import { FullScreenCode } from 'mdx-deck/layouts'
+import { Split } from 'mdx-deck/layouts'
+import { SplitRight } from 'mdx-deck/layouts'
+import { CodeSurfer } from "mdx-deck-code-surfer"
+import { LiveCode } from 'mdx-deck-live-code';
+
+import CustomLayout from '../components/CustomLayout'
+
+<Head>
+  <title>Full Stack optimization with gRPC and gRPC-web</title>
+</Head>
+
+<img style={{ width: '200px', height:'71px', marginBottom: '2vh'}} src='assets/svg/grpc.svg' />
+
+----
+
+Full Stack optimization with  
+gRPC and gRPC-web
+
+---
+
+# Agenda
+
+- Microservices and new challenges
+- Protobuf, gRPC and tools
+- gRPC-web nowadays
+- Demos 🙏
+
+---
+
+# Monolith vs. Microservices
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+![](assets/img/architecture_evolution_ballerina.png)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+export default CustomLayout
+
+> "Write programs that do one thing and do it well. Write programs to work together."  
+— [Unix Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# Great! But... 
+
+```notes
+- desacopled teams:
+  - flexibility
+  - independence 
+  - fast 
+  - single responsibility
+- BUT...
+```
+
+---
+
+<Image src='assets/img/uncle_ben.webp' />
+
+```notes
+- “With Great Power Comes Great Responsibility”
+  — Uncle Ben
+- Big problems too!
+```
+
+---
+
+export default CustomLayout
+
+> "The biggest issue in changing a monolith into microservices lies in changing the communication pattern"  
+— [Martin Flower](https://martinfowler.com/articles/microservices.html)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# Communication!
+
+- SOAP ...... XML
+- REST ...... JSON
+- gRPC ...... Protobuffer
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# [gRPC](https://grpc.io/)
+
+- RPC framework defined on top of **HTTP/2**
+- **Protobuf** integrations
+- Implementation in ~10 languages
+- Streaming capabilities
+- Feature rich
+
+
+```notes
+- In gRPC, a client application can directly call methods of a server application that is on a different machine as if it was a local object. 
+- On the server side, the server implements and runs a gRPC server to handle client calls. 
+- On the client side, the client has a stub that provides the same methods as the server.
+```
+
+---
+
+# [HTTP/2](https://tools.ietf.org/html/rfc7540)
+
+- Data compression of HTTP headers
+- Server-side Push
+- Pipelining of requests
+- Multiplexing multiple requests over a single TCP connection
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# [Protobuffer](https://developers.google.com/protocol-buffers)
+
+- IDL (Interface definition language)
+- Data model
+- Wire format
+
+<h5>"think XML, but smaller, faster, and simpler"</h5> 
+
+```notes
+- IDL:
+  - Describe once and generate Interface for any language
+- Data Model:
+  - Structure of the request and response 
+- Wire format
+  - Binary format for network transmission
+```
+
+---
+
+```protobuf
+syntax = "proto3";
+
+package helloworld;
+
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc RepeatHello (HelloRequest) returns (stream HelloReply);
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
+```
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+#  JSON vs. Protobuffer
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+![](assets/img/grpc_services.png)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# [protoc](https://github.com/protocolbuffers/protobuf/releases)
+
+- compile `.proto` files
+- code-generator of messages and method stubs 
+- extensible with plugins
+
+```
+protoc --go_out=. inputs/hello.proto
+```
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# [gRPC-web](https://grpc.io/docs/tutorials/basic/web.html)
+
+- [specification](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+![](assets/img/grpc_web_grpc_services.png)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# Implementations
+
+Google:
+- [grpc-web](https://www.npmjs.com/package/grpc-web): client in JavaScript
+- [Envoy](https://www.envoyproxy.io/docs/envoy/latest/configuration/http_filters/grpc_web_filter): reverse proxy HTTP filter
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+# Implementations
+
+Improbable:
+- [@improbable-eng/grpc-web](https://www.npmjs.com/package/@improbable-eng/grpc-web): client in TypeScript
+- [grpcweb](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcweb): a wrapper around a gRPC-Go Server
+- [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy): standalone reverse proxy
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# REST with gRPC
+
+![](assets/img/rest_grpc.png)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# gRPC-web with Envoy 
+
+![](assets/img/grpc_web_envoy_grpc.png)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+<CodeSurfer
+  title="Envoy Configuration"
+  code={require("!raw-loader!snippets/envoy-grpc-web-config.yaml")}
+  dark={true}
+  steps={[
+    { notes: "Envoy proxy configuration to run gRCP-web" },
+    { lines: [26, 30], notes: "Allow grpc-web headers" },
+    { lines: [32], notes: "Expose grpc-web headers" },
+    { range: [34, 37], notes: "Add envoy to http filters" }
+  ]}
+/>
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# Full gRPC!!!
+
+![](assets/img/grpc_web_grpc.png)
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# DEMOS
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# EXTRAS
+
+```notes
+- Tools and projects to check: 
+  - gRPC-gateway
+  - BloomRPC
+```
+
+---
+
+# [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway)
+
+gRPC to JSON proxy generator
+
+![](assets/img/grpc_gateway.png)
+
+```notes
+- Is a plugin of protoc.
+- It reads gRPC service definition, and generates a reverse-proxy server which translates a RESTful JSON API into gRPC.
+- This server is generated according to the google.api.http annotation in your gRPC service definition.
+- It helps you to provide your APIs in both gRPC and RESTful style at the same time.
+```
+
+---
+
+<CodeSurfer
+  title="Sample Service"
+  code={require("!raw-loader!snippets/grpc-gateway-snippet.proto")}
+  dark={true}
+  steps={[
+    { notes: "Generated according to the google.api.http annotations" },
+    { lines: [5], notes: "Import the annotations" },
+    { range: [13, 16], notes: "Define the Rest endpoint" }
+  ]}
+/>
+
+---
+
+export default SplitRight
+
+![](assets/img/bloomrpc_editor_preview.gif)
+
+
+![](assets/img/bloomrpc_logo.png)
+
+BloomRPC
+
+
+<https://github.com/uw-labs/bloomrpc>
+
+
+```notes
+- The missing GUI Client for GRPC services 
+- Like Postman or Insomnia
+```
+
+---
+
+# Review
+
+- ...
+
+```notes
+- WRITE SOME NOTES HERE
+```
+---
+
+# Conclusion
+
+- ⬆ number of microservices:
+  - communication problem!
+- JSON -> Protobuffer
+- gRPC will become dominant very soon?
+- gRPC-web ready?
+- ...
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+export default FullScreenCode
+
+```jsx
+<Button>Beep</Button>
+```
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+
+export default Code
+
+```javascript A playground slide!
+console.log('Hello world');
+```
+---
+
+<LiveCode
+  title="How to greet people"
+  size="small"
+  code="<p>Hello World!</p>"
+/>
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+export default CustomLayout
+
+# Custom Layout
+
+Custom Layout
+
+```notes
+- WRITE SOME NOTES HERE
+```
+
+---
+
+# But is all JS 🤔
+
+- Browser `!==` Server
+- [grpc-node](https://github.com/grpc/grpc-node): Node C++ Addon
+- Communication inter-microservices
+
+```notes
+- WRITE SOME NOTES HERE
+```
