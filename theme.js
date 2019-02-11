@@ -11,7 +11,8 @@ export default {
   colors: {
     ...theme.colors,
     background: '#333',
-    link: '#0ff',
+    link: '#f0f',
+    heading: '#0ff',
   },  
   blockquote: {
     fontStyle: 'italic'

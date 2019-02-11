@@ -21,21 +21,36 @@ import CustomLayout from '../components/CustomLayout'
 Full Stack optimization with  
 gRPC and gRPC-web
 
+```notes
+- "Welcome!"
+- Introduce yourself
+```
+
 ---
 
 # Agenda
 
-- Microservices and new challenges
-- Protobuf, gRPC and tools
+- Microservices and the new challenges
+- gRPC, Protobuf and tools
 - gRPC-web nowadays
 - Demos 🙏
+
+```notes
+- Overview:
+  - IT architecture evolution and the needs in this new environment 
+  - The rising of gRPC
+  - How the gRPC-web fit today
+- "Start pray for gods of live-demo!"
+```
 
 ---
 
 # Monolith vs. Microservices
 
 ```notes
-- WRITE SOME NOTES HERE
+- But before explain gRPC and gRPC-web:
+  - talk about IT architecture evolution
+  - state of microservices nowadays and future
 ```
 
 ---
@@ -43,7 +58,14 @@ gRPC and gRPC-web
 ![](assets/img/architecture_evolution_ballerina.png)
 
 ```notes
-- WRITE SOME NOTES HERE
+- Past: 
+  - mainframes, legacy
+- Today: 
+  - serveless: (AWS: Lambda; Google-Firebase: Cloud functions)
+- microservices:  
+  - atomic
+  - desacopled 
+- "Endpoints.. endpoints everywhere!"
 ```
 
 ---
@@ -54,7 +76,10 @@ export default CustomLayout
 — [Unix Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)
 
 ```notes
-- WRITE SOME NOTES HERE
+- Unix programs:
+  - single responsibility
+  - small 
+  - good interface communication
 ```
 
 ---
@@ -62,12 +87,13 @@ export default CustomLayout
 # Great! But... 
 
 ```notes
-- desacopled teams:
-  - flexibility
-  - independence 
-  - fast 
-  - single responsibility
-- BUT...
+- Also great for development:
+  - desacopled teams:
+    - flexibility
+    - independence 
+    - fast 
+    - single responsibility
+- But...
 ```
 
 ---
@@ -75,9 +101,8 @@ export default CustomLayout
 <Image src='assets/img/uncle_ben.webp' />
 
 ```notes
-- “With Great Power Comes Great Responsibility”
-  — Uncle Ben
-- Big problems too!
+- “With Great Power Comes Great Responsibility” — Uncle Ben
+- and Big problems too!
 ```
 
 ---
@@ -88,7 +113,10 @@ export default CustomLayout
 — [Martin Flower](https://martinfowler.com/articles/microservices.html)
 
 ```notes
-- WRITE SOME NOTES HERE
+- Communication:
+  - simple
+  - fast
+  - smart
 ```
 
 ---
@@ -100,7 +128,15 @@ export default CustomLayout
 - gRPC ...... Protobuffer
 
 ```notes
-- WRITE SOME NOTES HERE
+- != patterns of communication
+- self describe
+- interface: rigid vs. flexibility
+- HTTP verbs vs. methods call
+- errors and returns code
+
+Obs: 
+- RESTful well documented with OpenAPI (Swagger): 👌  
+  - a deal, without guarantees 😭
 ```
 
 ---
@@ -113,11 +149,12 @@ export default CustomLayout
 - Streaming capabilities
 - Feature rich
 
-
 ```notes
-- In gRPC, a client application can directly call methods of a server application that is on a different machine as if it was a local object. 
-- On the server side, the server implements and runs a gRPC server to handle client calls. 
-- On the client side, the client has a stub that provides the same methods as the server.
+- gRPC 1.0: released in August 2016
+- support for polyglot environments
+- focus on performance
+- type safety 
+- developer productivity: transformed the way developers design their architectures
 ```
 
 ---
@@ -130,7 +167,10 @@ export default CustomLayout
 - Multiplexing multiple requests over a single TCP connection
 
 ```notes
-- WRITE SOME NOTES HERE
+- origin in Google SPDY protocol
+- fix some problems in HTTP 1.x
+- high-level compatibility with HTTP 1.1:
+  - methods, status codes, URIs, and most header fields
 ```
 
 ---
@@ -148,7 +188,7 @@ export default CustomLayout
   - Describe once and generate Interface for any language
 - Data Model:
   - Structure of the request and response 
-- Wire format
+- Wire format:
   - Binary format for network transmission
 ```
 
@@ -174,15 +214,31 @@ message HelloReply {
 ```
 
 ```notes
-- WRITE SOME NOTES HERE
+- current syntax version: 3.0
+- define request and response
+- define service methods
+- can use streams
 ```
 
 ---
 
 #  JSON vs. Protobuffer
 
+- Text vs. Binary
+- Flexibility vs. Well defined types
+- Errors catch
+- (De)serialization
+
 ```notes
-- WRITE SOME NOTES HERE
+- Text format transportation is bigger then binary 
+- JSON more flexible:
+  - can send dynamic data and don't have to adhere to a rigid structure
+- Errors catch:
+  - Protobuf: you know the request and response format
+  - JSON: you can know the expect format, but no garantees
+- (De)serialization:
+  - can introduces the possibility of errors  
+  - as well as performance overhead
 ```
 
 ---
@@ -190,7 +246,9 @@ message HelloReply {
 ![](assets/img/grpc_services.png)
 
 ```notes
-- WRITE SOME NOTES HERE
+- In gRPC, a client application can directly call methods of a server application that is on a different machine as if it was a local object. 
+- On the server side, the server implements and runs a gRPC server to handle client calls. 
+- On the client side, the client has a stub that provides the same methods as the server.
 ```
 
 ---
@@ -198,25 +256,35 @@ message HelloReply {
 # [protoc](https://github.com/protocolbuffers/protobuf/releases)
 
 - compile `.proto` files
-- code-generator of messages and method stubs 
-- extensible with plugins
+- code-generator 
+- plugins
 
 ```
 protoc --go_out=. inputs/hello.proto
 ```
 
 ```notes
-- WRITE SOME NOTES HERE
+- Golang example, but offer generation of clients for ~10 languages
+- code-generator of messages and method stubs 
+- extensible with plugins
 ```
 
 ---
 
 # [gRPC-web](https://grpc.io/docs/tutorials/basic/web.html)
 
-- [specification](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md)
+- "gRPC looks great. Can I use it on the web?" 🤔 
+- [limitations](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) don't allow implements the full gRPC protocol in the web browser 
+- proposed new gRPC-web [specification](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md): currently implemented in [Envoy](https://envoyproxy.io/)
 
 ```notes
-- WRITE SOME NOTES HERE
+- Limitations:
+  - Standard Web APIs (XHR, Fetch) don’t expose HTTP wire-transport details:
+    - don't expose the concepts of channel, frames and byte manipulation, that are necessary to implements binary gRPC protocol 
+  - Web clients prefers text data: security, JSON compatible encoding, streaming
+  - Response trailers are not supported
+  - Web-specific features: CORS, security (XSRF/CSP), etc
+  - Firewall, corporate proxies restrictions, etc
 ```
 
 ---
@@ -224,7 +292,20 @@ protoc --go_out=. inputs/hello.proto
 ![](assets/img/grpc_web_grpc_services.png)
 
 ```notes
-- WRITE SOME NOTES HERE
+- How to do this?
+```
+
+---
+
+# #01 REST with gRPC
+
+![](assets/img/rest_grpc.png)
+
+```notes
+- No problem with this approach, but:
+  - definition of HTTP status codes 
+  - JSON (De)serialization
+  - deployment and management burden for the HTTP server itself
 ```
 
 ---
@@ -240,6 +321,7 @@ Google:
 ```
 
 ---
+
 # Implementations
 
 Improbable:
@@ -253,22 +335,22 @@ Improbable:
 
 ---
 
-# REST with gRPC
+# Improbable overview
 
-![](assets/img/rest_grpc.png)
+![](assets/img/grpc_web_improbable_overview.png)
 
 ```notes
-- WRITE SOME NOTES HERE
+- Overview of Improbable libraries utilization
 ```
 
 ---
 
-# gRPC-web with Envoy 
+# #02 gRPC-web with Envoy
 
 ![](assets/img/grpc_web_envoy_grpc.png)
 
 ```notes
-- WRITE SOME NOTES HERE
+- Envoy reversal proxy doing all the hard work!
 ```
 
 ---
@@ -281,27 +363,58 @@ Improbable:
     { notes: "Envoy proxy configuration to run gRCP-web" },
     { lines: [26, 30], notes: "Allow grpc-web headers" },
     { lines: [32], notes: "Expose grpc-web headers" },
-    { range: [34, 37], notes: "Add envoy to http filters" }
+    { range: [34, 37], notes: "Add grpc-web to http filters" },
+    { lines: [42], notes: "The service takes HTTP/2 connections (gRPC)" }
   ]}
 />
 
 ```notes
-- WRITE SOME NOTES HERE
+- Envoy yaml config:
+  - Atypical headers  "x-grpc-web", "grpc-status", and "grpc-message" — are required for handling gRPC-Web client requests
+  - "envoy.grpc_web" HTTP filter performs the “heavy lifting” for gRPC-Web proxying
+  - The "http2_protocol_options: {}" specifies that the service takes HTTP/2 (in this case gRPC) connections
 ```
 
 ---
 
-# Full gRPC!!!
+# #03 gRPC-web in server
 
 ![](assets/img/grpc_web_grpc.png)
 
 ```notes
-- WRITE SOME NOTES HERE
+- Server handle gRCP-web connections and doing the hard work
 ```
 
 ---
 
-# DEMOS
+# Advantages
+
+- End-to-end gRPC 
+- Tighter coordination between frontend and backend teams: `.proto` as source of truth
+- Easily generate client libraries 
+
+```notes
+- pure gRPC, enabling you to craft your entire RPC pipeline using Protocol Buffers. 
+- no longer need to have your “microservices teams” alongside your “client team” 
+- client libraries can be gRPC libraries: ~10 languages
+```
+
+---
+
+# Demos
+
+```notes
+- server x server:
+  - REST x REST
+  - gRPC x gRPC
+- web x server:
+  - gRPC-web x Envoy x gRCP
+  - gRPC-web x gRPC server
+```
+
+---
+
+# Results
 
 ```notes
 - WRITE SOME NOTES HERE
@@ -326,7 +439,7 @@ gRPC to JSON proxy generator
 ![](assets/img/grpc_gateway.png)
 
 ```notes
-- Is a plugin of protoc.
+- Is a plugin for protoc.
 - It reads gRPC service definition, and generates a reverse-proxy server which translates a RESTful JSON API into gRPC.
 - This server is generated according to the google.api.http annotation in your gRPC service definition.
 - It helps you to provide your APIs in both gRPC and RESTful style at the same time.
@@ -349,15 +462,11 @@ gRPC to JSON proxy generator
 
 export default SplitRight
 
-![](assets/img/bloomrpc_editor_preview.gif)
-
+<img style={{ width: '600px'}} src='assets/img/bloomrpc_editor_preview.gif' />
 
 ![](assets/img/bloomrpc_logo.png)
 
-BloomRPC
-
-
-<https://github.com/uw-labs/bloomrpc>
+[BloomRPC](https://github.com/uw-labs/bloomrpc)
 
 
 ```notes
@@ -367,23 +476,12 @@ BloomRPC
 
 ---
 
-# Review
-
-- ...
-
-```notes
-- WRITE SOME NOTES HERE
-```
----
-
 # Conclusion
 
-- ⬆ number of microservices:
-  - communication problem!
-- JSON -> Protobuffer
+- 📈 number of microservices: 💬 communication becomes a problem!
+- JSON -> Protobuffer | HTTP/1.x -> HTTP/2.0
 - gRPC will become dominant very soon?
-- gRPC-web ready?
-- ...
+- gRPC-web ready? [ROADMAP](https://github.com/grpc/grpc-web/blob/master/ROADMAP.md)
 
 ```notes
 - WRITE SOME NOTES HERE
@@ -456,7 +554,7 @@ Custom Layout
 # But is all JS 🤔
 
 - Browser `!==` Server
-- [grpc-node](https://github.com/grpc/grpc-node): Node C++ Addon
+- [grpc-node](https://github.com/grpc/grpc-node): use a Node C++ Addon
 - Communication inter-microservices
 
 ```notes
