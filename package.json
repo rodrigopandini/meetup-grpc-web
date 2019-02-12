@@ -5,7 +5,7 @@
   "scripts": {
     "start": "mdx-deck deck.js",
     "build": "mdx-deck build deck.js --no-html",
-    "postbuild": "cp -r assets dist",
+    "postbuild": "cp -r assets dist && cp -r dist/* docs",
     "pdf": "mdx-deck pdf deck.js",
     "image": "mdx-deck screenshot deck.js",
     "help": "mdx-deck"
