@@ -20,5 +20,14 @@
     "mdx-deck-live-code": "^1.0.0",
     "raw-loader": "^1.0.0"
   },
-  "name": "meetup"
+  "name": "meetup",
+  "dependencies": {
+    "@pismo/bolt-button": "^0.4.0",
+    "@pismo/bolt-core": "^0.4.0",
+    "@grpc/proto-loader": "^0.3.0",
+    "google-protobuf": "^3.7.0-rc.2",
+    "grpc-web": "^1.0.3",
+    "grpc": "^1.15.0",
+    "polished": "^2.3.3"
+  }
 }

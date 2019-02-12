@@ -9,6 +9,7 @@ import { CodeSurfer } from "mdx-deck-code-surfer"
 import { LiveCode } from 'mdx-deck-live-code';
 
 import CustomLayout from '../components/CustomLayout'
+import DemoEnvoy from '../components/DemoEnvoy'
 
 <Head>
   <title>Full Stack optimization with gRPC and gRPC-web</title>
@@ -125,7 +126,7 @@ export default CustomLayout
 
 - SOAP ...... XML
 - REST ...... JSON
-- gRPC ...... Protobuffer
+- **gRPC** ...... **Protobuffer**
 
 ```notes
 - != patterns of communication
@@ -259,8 +260,10 @@ message HelloReply {
 - code-generator 
 - plugins
 
-```
-protoc --go_out=. inputs/hello.proto
+```powershell
+$ protoc -I=. helloworld.proto \  
+    --js_out=import_style=commonjs:. \  
+    --grpc-web_out=import_style=commonjs,mode=grpcwebtext:.
 ```
 
 ```notes
@@ -271,9 +274,18 @@ protoc --go_out=. inputs/hello.proto
 
 ---
 
+### gRPC looks great. Can I use it on the web? 🤔 
+
+![](assets/img/grpc_web_grpc_services.png)
+
+```notes
+- How to do this?
+```
+
+---
+
 # [gRPC-web](https://grpc.io/docs/tutorials/basic/web.html)
 
-- "gRPC looks great. Can I use it on the web?" 🤔 
 - [limitations](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) don't allow implements the full gRPC protocol in the web browser 
 - proposed new gRPC-web [specification](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md): currently implemented in [Envoy](https://envoyproxy.io/)
 
@@ -285,14 +297,6 @@ protoc --go_out=. inputs/hello.proto
   - Response trailers are not supported
   - Web-specific features: CORS, security (XSRF/CSP), etc
   - Firewall, corporate proxies restrictions, etc
-```
-
----
-
-![](assets/img/grpc_web_grpc_services.png)
-
-```notes
-- How to do this?
 ```
 
 ---
@@ -560,3 +564,11 @@ Custom Layout
 ```notes
 - WRITE SOME NOTES HERE
 ```
+
+---
+
+export default DemoEnvoy
+
+# Demo Envoy
+
+---
