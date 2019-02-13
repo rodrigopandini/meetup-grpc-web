@@ -15,7 +15,9 @@ import {
 import { TransactionModel } from './transaction_pb.js'
 import { TransactionClient } from './transaction_grpc_web_pb.js'
 
-const clientTransaction = new TransactionClient('http://localhost:8082')
+const GRPC_WEB_URL = 'http://a113684522fad11e981420a405d7e6bf-319289607.sa-east-1.elb.amazonaws.com:8082/'
+
+const clientTransaction = new TransactionClient(GRPC_WEB_URL)
 const requestTransaction = new TransactionModel()
 requestTransaction.setMti('test')
 requestTransaction.setCaller('test')

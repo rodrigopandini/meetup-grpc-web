@@ -13,7 +13,7 @@
     "docker:build:hello": "docker build -t helloworld/envoy -f ./.docker/envoyHelloWorld.Dockerfile ./.docker",
     "docker:run:hello": "docker run -d -p 8081:8081 --network=host helloworld/envoy",
     "docker:build:transaction": "docker build -t transaction/envoy -f ./.docker/envoyTransaction.Dockerfile ./.docker",
-    "docker:run:transaction": "docker run -d -p 8082:8082 --network=host transaction/envoy"
+    "docker:run:transaction": "docker run -d -p 8082:8082 transaction/envoy"
   },
   "keywords": [],
   "author": "Brent Jackson",

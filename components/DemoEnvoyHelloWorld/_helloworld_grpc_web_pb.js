@@ -1,5 +1,5 @@
 /**
- * @fileoverview gRPC-Web generated client stub for transactionproto
+ * @fileoverview gRPC-Web generated client stub for helloworld
  * @enhanceable
  * @public
  */
@@ -12,7 +12,7 @@ const grpc = {};
 grpc.web = require('grpc-web');
 
 const proto = {};
-proto.transactionproto = require('./transaction_pb.js');
+proto.helloworld = require('./helloworld_pb.js');
 
 /**
  * @param {string} hostname
@@ -22,7 +22,7 @@ proto.transactionproto = require('./transaction_pb.js');
  * @struct
  * @final
  */
-proto.transactionproto.TransactionClient =
+proto.helloworld.GreeterClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'binary';
@@ -58,15 +58,15 @@ proto.transactionproto.TransactionClient =
  * @struct
  * @final
  */
-proto.transactionproto.TransactionPromiseClient =
+proto.helloworld.GreeterPromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
   options['format'] = 'binary';
 
   /**
-   * @private @const {!proto.transactionproto.TransactionClient} The delegate callback based client
+   * @private @const {!proto.helloworld.GreeterClient} The delegate callback based client
    */
-  this.delegateClient_ = new proto.transactionproto.TransactionClient(
+  this.delegateClient_ = new proto.helloworld.GreeterClient(
       hostname, credentials, options);
 
 };
@@ -75,52 +75,52 @@ proto.transactionproto.TransactionPromiseClient =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.transactionproto.TransactionModel,
- *   !proto.transactionproto.Response>}
+ *   !proto.helloworld.HelloRequest,
+ *   !proto.helloworld.HelloReply>}
  */
-const methodInfo_Transaction_PostTransaction = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.transactionproto.Response,
-  /** @param {!proto.transactionproto.TransactionModel} request */
+const methodInfo_Greeter_SayHello = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.helloworld.HelloReply,
+  /** @param {!proto.helloworld.HelloRequest} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.transactionproto.Response.deserializeBinary
+  proto.helloworld.HelloReply.deserializeBinary
 );
 
 
 /**
- * @param {!proto.transactionproto.TransactionModel} request The
+ * @param {!proto.helloworld.HelloRequest} request The
  *     request proto
  * @param {!Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.transactionproto.Response)}
+ * @param {function(?grpc.web.Error, ?proto.helloworld.HelloReply)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.transactionproto.Response>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.helloworld.HelloReply>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.transactionproto.TransactionClient.prototype.postTransaction =
+proto.helloworld.GreeterClient.prototype.sayHello =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/transactionproto.Transaction/PostTransaction',
+      '/helloworld.Greeter/SayHello',
       request,
       metadata,
-      methodInfo_Transaction_PostTransaction,
+      methodInfo_Greeter_SayHello,
       callback);
 };
 
 
 /**
- * @param {!proto.transactionproto.TransactionModel} request The
+ * @param {!proto.helloworld.HelloRequest} request The
  *     request proto
  * @param {!Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.transactionproto.Response>}
+ * @return {!Promise<!proto.helloworld.HelloReply>}
  *     The XHR Node Readable Stream
  */
-proto.transactionproto.TransactionPromiseClient.prototype.postTransaction =
+proto.helloworld.GreeterPromiseClient.prototype.sayHello =
     function(request, metadata) {
   return new Promise((resolve, reject) => {
-    this.delegateClient_.postTransaction(
+    this.delegateClient_.sayHello(
       request, metadata, (error, response) => {
         error ? reject(error) : resolve(response);
       });
@@ -128,5 +128,5 @@ proto.transactionproto.TransactionPromiseClient.prototype.postTransaction =
 };
 
 
-module.exports = proto.transactionproto;
+module.exports = proto.helloworld;
 

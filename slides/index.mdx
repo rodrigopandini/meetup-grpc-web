@@ -553,19 +553,179 @@ client.sayHello(request, metadata, (err, response) => {
 
 # Demos
 
+- REST x REST
+- gRPC x gRPC
 - web x REST
 - gRPC-web x Envoy x gRCP
-- gRPC-web x gRPC server
-
 
 ```notes
 - server x server:
   - REST x REST
   - gRPC x gRPC
 - web x server:
+  - web x REST
   - gRPC-web x Envoy x gRCP
-  - gRPC-web x gRPC server
 ```
+
+---
+
+export default FullScreenCode
+
+```protobuf
+syntax = "proto3";
+
+option optimize_for = SPEED;
+
+package transactionproto;
+
+service Transaction {
+  rpc PostTransaction (TransactionModel) returns (Response) {
+  }
+}
+
+message Response{
+  string status = 1;
+}
+
+message TransactionModel {
+  string mti = 1;
+  string caller = 201;
+  string correlation_id = 200;
+  string field2_primary_account_number = 2;
+  string field3_processing_code = 3;
+  string field4_amount_transaction = 4;
+  string field5_amount_settlement = 5;
+  string field6_amount_cardholder_billing = 6;
+  string field7_tranmission_date_and_time = 7;
+  string field8_amount_cardholder_billing_fee = 8;
+  string field9_conversion_rate_settlement = 9;
+  string field10_conversion_rate_cardholder_billing = 10;
+  string field11_stan = 11;
+  string field12_time_local_transaction = 12;
+  string field13_date_local_transaction = 13;
+  string field14_date_expiration = 14;
+  string field15_date_settlement = 15;
+  string field16_date_conversion = 16;
+  string field17_date_capture = 17;
+  string field18_merchant_type = 18;
+  string field20_pan = 20;
+  string field21_forwarding_institution_country_code = 21;
+  string field22_pos_entry_mode = 22;
+  string field23_card_sequence_number = 23;
+  string field24_network_international_id = 24;
+  string field25_pos_condition_code = 25;
+  string field26_pos_pin_capture_code = 26;
+  string field27_authorization_id_response_length = 27;
+  string field28_amount_transaction_fee = 28;
+  string field29_amount_settlement_fee = 29;
+  string field30_amount_transaction_processing_fee = 30;
+  string field31_amount_settlement_processing_fee = 31;
+  string field32_acquiring_institution_id_code = 32;
+  string field33_forwarding_institution_id_code = 33;
+  string field34_pan = 34;
+  string field35_track_2_data = 35;
+  string field36_track_3_data = 36;
+  string field37_retrieval_reference_number = 37;
+  string field38_authorization_id_response = 38;
+  string field39_response_code = 39;
+  string field40_service_restriction_code = 40;
+  string field41_card_acceptor_terminal_id = 41;
+  string field42_card_acceptor_id_code = 42;
+  string field43_card_acceptor_name_location_for_all_transactions = 43;
+  string field44_additional_response_data = 44;
+  string field45_track_1_data = 45;
+  string field46_expanded_additional_amounts = 46;
+  string field47_additional_data_national_use = 47;
+  string field48_additional_data_private_user = 48;
+  string field49_currency_code_transaction = 49;
+  string field50_currency_code_settlement = 50;
+  string field51_currency_code_cardholder_billing = 51;
+  string field52_personal_id_number_pin_data = 52;
+  string field53_security_related_control_information = 53;
+  string field54_additional_amounts = 54;
+  string field55_integrated_circuit_card = 55;
+  string field56_payment_account_data = 56;
+  string field57_reserved_for_national_use = 57;
+  string field58_reserved_for_national_use = 58;
+  string field59_reserved_for_national_use = 59;
+  string field60_advice_reason_code = 60;
+  string field61_pos_data = 61;
+  string field62_intermediate_network_facility_data = 62;
+  string field63_network_data = 63;
+  string field64_message_authentication_code = 64;
+  string field65_bit_map_extended = 65;
+  string field66_settlement_code = 66;
+  string field67_extended_payment_code = 67;
+  string field68_receiving_institution_country_code = 68;
+  string field69_settlement_institution_country_code = 69;
+  string field70_network_managment_information_code = 70;
+  string field71_message_number = 71;
+  string field72_message_number_last = 72;
+  string field73_date_action = 73;
+  string field74_credits_number = 74;
+  string field75_credits_reversal_number = 75;
+  string field76_debits_number = 76;
+  string field77_debits_reversal_number = 77;
+  string field78_transfers_number = 78;
+  string field79_transfers_reversal_number = 79;
+  string field80_inquiries_number = 80;
+  string field81_authorizations_number = 81;
+  string field82_credits_processing_fee_amount = 82;
+  string field83_credits_transaction_fee_amount = 83;
+  string field84_debits_processing_fee_amount = 84;
+  string field85_debits_transaction_fee_amount = 85;
+  string field86_credits_amount = 86;
+  string field87_credits_reversal_amount = 87;
+  string field88_debits_amount = 88;
+  string field89_reversal_amount = 89;
+  string field90_original_data_elements = 90;
+  string field91_issuer_file_update_code = 91;
+  string field92_file_security_code = 92;
+  string field93_response_indicator = 93;
+  string field94_service_indicator = 94;
+  string field95_replacement_amounts = 95;
+  string field96_message_security_code = 96;
+  string field97_amount_net_settlement = 97;
+  string field98_payee = 98;
+  string field99_settlement_instituition_id_code = 99;
+  string field100_receiving_institution_id_code = 100;
+  string field101_file_name = 101;
+  string field102_account_id1 = 102;
+  string field103_account_id2 = 103;
+  string field104_transaction_description = 104;
+  string field105_reserved_for_mastercard_use = 105;
+  string field106_reserved_for_mastercard_use = 106;
+  string field107_reserved_for_mastercard_use = 107;
+  string field108_money_send_reference_data = 108;
+  string field109_reserved_for_iso_use = 109;
+  string field110_reserved_for_iso_use = 110;
+  string field111_reserved_for_iso_use = 111;
+  string field112_additional_data_national_use = 112;
+  string field113_reserved_for_national_use = 113;
+  string field114_reserved_for_national_use = 114;
+  string field115_reserved_for_national_use = 115;
+  string field116_reserved_for_national_use = 116;
+  string field117_reserved_for_national_use = 117;
+  string field118_reserved_for_national_use = 118;
+  string field119_reserved_for_national_use = 119;
+  string field120_record_data = 120;
+  string field121_authorizing_agent_id_code = 121;
+  string field122_additional_record_data = 122;
+  string field123_receipt_free_text = 123;
+  string field124_member_defined_data = 124;
+  string field125_new_pin_data = 125;
+  string field126_private_data = 126;
+  string field127_private_data = 127;
+  string field128_message_authentication_code = 128;
+}
+```
+
+--- 
+
+# Demos server x server
+
+- REST x REST (Insomnia)
+- gRPC x gRPC (BloomRPC)
 
 ---
 
@@ -724,159 +884,6 @@ const transaction = {
 export default DemoRestTransaction
 
 # Demo REST Transaction
-
----
-
-export default FullScreenCode
-
-```protobuf
-syntax = "proto3";
-
-option optimize_for = SPEED;
-
-package transactionproto;
-
-service Transaction {
-  rpc PostTransaction (TransactionModel) returns (Response) {
-  }
-}
-
-message Response{
-  string status = 1;
-}
-
-message TransactionModel {
-  string mti = 1;
-  string caller = 201;
-  string correlation_id = 200;
-  string field2_primary_account_number = 2;
-  string field3_processing_code = 3;
-  string field4_amount_transaction = 4;
-  string field5_amount_settlement = 5;
-  string field6_amount_cardholder_billing = 6;
-  string field7_tranmission_date_and_time = 7;
-  string field8_amount_cardholder_billing_fee = 8;
-  string field9_conversion_rate_settlement = 9;
-  string field10_conversion_rate_cardholder_billing = 10;
-  string field11_stan = 11;
-  string field12_time_local_transaction = 12;
-  string field13_date_local_transaction = 13;
-  string field14_date_expiration = 14;
-  string field15_date_settlement = 15;
-  string field16_date_conversion = 16;
-  string field17_date_capture = 17;
-  string field18_merchant_type = 18;
-  string field20_pan = 20;
-  string field21_forwarding_institution_country_code = 21;
-  string field22_pos_entry_mode = 22;
-  string field23_card_sequence_number = 23;
-  string field24_network_international_id = 24;
-  string field25_pos_condition_code = 25;
-  string field26_pos_pin_capture_code = 26;
-  string field27_authorization_id_response_length = 27;
-  string field28_amount_transaction_fee = 28;
-  string field29_amount_settlement_fee = 29;
-  string field30_amount_transaction_processing_fee = 30;
-  string field31_amount_settlement_processing_fee = 31;
-  string field32_acquiring_institution_id_code = 32;
-  string field33_forwarding_institution_id_code = 33;
-  string field34_pan = 34;
-  string field35_track_2_data = 35;
-  string field36_track_3_data = 36;
-  string field37_retrieval_reference_number = 37;
-  string field38_authorization_id_response = 38;
-  string field39_response_code = 39;
-  string field40_service_restriction_code = 40;
-  string field41_card_acceptor_terminal_id = 41;
-  string field42_card_acceptor_id_code = 42;
-  string field43_card_acceptor_name_location_for_all_transactions = 43;
-  string field44_additional_response_data = 44;
-  string field45_track_1_data = 45;
-  string field46_expanded_additional_amounts = 46;
-  string field47_additional_data_national_use = 47;
-  string field48_additional_data_private_user = 48;
-  string field49_currency_code_transaction = 49;
-  string field50_currency_code_settlement = 50;
-  string field51_currency_code_cardholder_billing = 51;
-  string field52_personal_id_number_pin_data = 52;
-  string field53_security_related_control_information = 53;
-  string field54_additional_amounts = 54;
-  string field55_integrated_circuit_card = 55;
-  string field56_payment_account_data = 56;
-  string field57_reserved_for_national_use = 57;
-  string field58_reserved_for_national_use = 58;
-  string field59_reserved_for_national_use = 59;
-  string field60_advice_reason_code = 60;
-  string field61_pos_data = 61;
-  string field62_intermediate_network_facility_data = 62;
-  string field63_network_data = 63;
-  string field64_message_authentication_code = 64;
-  string field65_bit_map_extended = 65;
-  string field66_settlement_code = 66;
-  string field67_extended_payment_code = 67;
-  string field68_receiving_institution_country_code = 68;
-  string field69_settlement_institution_country_code = 69;
-  string field70_network_managment_information_code = 70;
-  string field71_message_number = 71;
-  string field72_message_number_last = 72;
-  string field73_date_action = 73;
-  string field74_credits_number = 74;
-  string field75_credits_reversal_number = 75;
-  string field76_debits_number = 76;
-  string field77_debits_reversal_number = 77;
-  string field78_transfers_number = 78;
-  string field79_transfers_reversal_number = 79;
-  string field80_inquiries_number = 80;
-  string field81_authorizations_number = 81;
-  string field82_credits_processing_fee_amount = 82;
-  string field83_credits_transaction_fee_amount = 83;
-  string field84_debits_processing_fee_amount = 84;
-  string field85_debits_transaction_fee_amount = 85;
-  string field86_credits_amount = 86;
-  string field87_credits_reversal_amount = 87;
-  string field88_debits_amount = 88;
-  string field89_reversal_amount = 89;
-  string field90_original_data_elements = 90;
-  string field91_issuer_file_update_code = 91;
-  string field92_file_security_code = 92;
-  string field93_response_indicator = 93;
-  string field94_service_indicator = 94;
-  string field95_replacement_amounts = 95;
-  string field96_message_security_code = 96;
-  string field97_amount_net_settlement = 97;
-  string field98_payee = 98;
-  string field99_settlement_instituition_id_code = 99;
-  string field100_receiving_institution_id_code = 100;
-  string field101_file_name = 101;
-  string field102_account_id1 = 102;
-  string field103_account_id2 = 103;
-  string field104_transaction_description = 104;
-  string field105_reserved_for_mastercard_use = 105;
-  string field106_reserved_for_mastercard_use = 106;
-  string field107_reserved_for_mastercard_use = 107;
-  string field108_money_send_reference_data = 108;
-  string field109_reserved_for_iso_use = 109;
-  string field110_reserved_for_iso_use = 110;
-  string field111_reserved_for_iso_use = 111;
-  string field112_additional_data_national_use = 112;
-  string field113_reserved_for_national_use = 113;
-  string field114_reserved_for_national_use = 114;
-  string field115_reserved_for_national_use = 115;
-  string field116_reserved_for_national_use = 116;
-  string field117_reserved_for_national_use = 117;
-  string field118_reserved_for_national_use = 118;
-  string field119_reserved_for_national_use = 119;
-  string field120_record_data = 120;
-  string field121_authorizing_agent_id_code = 121;
-  string field122_additional_record_data = 122;
-  string field123_receipt_free_text = 123;
-  string field124_member_defined_data = 124;
-  string field125_new_pin_data = 125;
-  string field126_private_data = 126;
-  string field127_private_data = 127;
-  string field128_message_authentication_code = 128;
-}
-```
 
 ---
 

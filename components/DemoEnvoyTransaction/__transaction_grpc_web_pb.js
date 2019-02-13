@@ -25,7 +25,7 @@ proto.transactionproto = require('./transaction_pb.js');
 proto.transactionproto.TransactionClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'binary';
+  options['format'] = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -61,7 +61,7 @@ proto.transactionproto.TransactionClient =
 proto.transactionproto.TransactionPromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'binary';
+  options['format'] = 'text';
 
   /**
    * @private @const {!proto.transactionproto.TransactionClient} The delegate callback based client
