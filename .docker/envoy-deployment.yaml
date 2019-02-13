@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: envoy
+  name: envoy
+  namespace: meetup-grpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: envoy
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: envoy
+        version: meetup-grpc
+      name: envoy
+    spec:
+      containers:
+      - image: 270036487593.dkr.ecr.us-east-1.amazonaws.com/grpc1:envoy
+        imagePullPolicy: Always
+        name: envoy
+        ports:
+        - containerPort: 8082
+          protocol: TCP
+        resources: {}
+        securityContext:
+          privileged: false
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

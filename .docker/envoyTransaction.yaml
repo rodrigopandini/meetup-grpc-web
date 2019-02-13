@@ -42,4 +42,4 @@ static_resources:
     type: logical_dns
     http2_protocol_options: {}
     lb_policy: round_robin
-    hosts: [{ socket_address: { address: '52.67.93.1', port_value: 50051 }}]
+    hosts: [{ socket_address: { address: 'grpc-1', port_value: 50051 }}]
