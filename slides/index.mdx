@@ -706,7 +706,7 @@ const transaction = {
 }
 
 (async () => {
-  const rawResponse = await fetch('http://a7939.../transaction', {
+  const rawResponse = await fetch('http://.../transaction', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -886,6 +886,34 @@ export default DemoEnvoyTransaction
 
 ---
 
+export default FullScreenCode
+
+```protobuf
+syntax = "proto3";
+
+package helloworld;
+
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
+```
+
+---
+
+export default DemoEnvoyHelloWorld
+
+# Demo gRPC-web Envoy Hello World
+
+---
+
 # Results
 
 ```notes
@@ -950,114 +978,14 @@ export default SplitRight
 
 # Conclusion
 
-- 📈 microservices: communication importance! 💬
+- 📈 microservices: communication importance!
 - HTTP/1.x -> HTTP/2.0 | JSON -> Protobuffer
 - gRPC will become dominant very soon?
 - gRPC-web ready? [ROADMAP](https://github.com/grpc/grpc-web/blob/master/ROADMAP.md)
+- Performance! 🚀 
 
 ```notes
 - WRITE SOME NOTES HERE
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-export default FullScreenCode
-
-```jsx
-<Button>Beep</Button>
-```
-
-```notes
-- WRITE SOME NOTES HERE
-```
-
----
-
-
-export default Code
-
-```javascript A playground slide!
-console.log('Hello world');
-```
----
-
-<LiveCode
-  title="How to greet people"
-  size="small"
-  code="<p>Hello World!</p>"
-/>
-
-```notes
-- WRITE SOME NOTES HERE
-```
-
----
-
-export default CustomLayout
-
-# Custom Layout
-
-Custom Layout
-
-```notes
-- WRITE SOME NOTES HERE
-```
-
----
-
-# But is all JS 🤔
-
-- Browser `!==` Server
-- [grpc-node](https://github.com/grpc/grpc-node): use a Node C++ Addon
-- Communication inter-microservices
-
-```notes
-- WRITE SOME NOTES HERE
-```
-
-
----
-
-export default FullScreenCode
-
-```protobuf
-syntax = "proto3";
-
-package helloworld;
-
-service Greeter {
-  rpc SayHello (HelloRequest) returns (HelloReply);
-}
-
-message HelloRequest {
-  string name = 1;
-}
-
-message HelloReply {
-  string message = 1;
-}
-```
-
----
-
-export default DemoEnvoyHelloWorld
-
-# Demo gRPC-web Envoy Hello World

@@ -17,8 +17,9 @@ var helloworld = protoDescriptor.helloworld;
 
 function doSayHello(call, callback) {
   callback(null, {
-    message: 'Hello! ' + call.request.name
+    message: `Hello! ${call.request.name}`
   });
+  console.log(`Hello! ${call.request.name}`)
 }
 
 function getServer() {
