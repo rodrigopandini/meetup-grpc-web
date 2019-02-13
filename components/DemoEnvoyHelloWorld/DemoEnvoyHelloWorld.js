@@ -37,16 +37,16 @@ export default class DemoEnvoyHelloWorld extends Component {
   }
 
   handleClick = (event) => {
-    console.time("timer")
+    console.time("timerHelloWorldGRPCLocal")
     const before = window.performance.now();
 
 
     clientGreeter.sayHello(requestHello, {}, (err, response) => {
-      console.timeEnd("timer")
-      const after = window.performance.now() - before
-
+      console.timeEnd("timerHelloWorldGRPCLocal")
+      const after = window.performance.now() - before  
+      
       this.setState( { 
-        timeMessage: `${after}ms : ${response.getMessage()}`,
+        timeMessage: `${after}ms | ${response.getMessage()}`,
         data: this.state.data.concat({ name: `Test${this.state.data.length+1}`, time: after })
       })
     })
@@ -63,6 +63,7 @@ export default class DemoEnvoyHelloWorld extends Component {
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
+          <Line type="linear" dataKey="avg" stroke="#82ca9d" activeDot={{r: 8}} strokeDasharray="5 5" />
           <Line type="linear" dataKey="time" stroke="#000" />
         </LineChart>
       </ResponsiveContainer>
