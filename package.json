@@ -8,7 +8,12 @@
     "postbuild": "cp -r assets dist && cp -r dist/* docs",
     "pdf": "mdx-deck pdf deck.js",
     "image": "mdx-deck screenshot deck.js",
-    "help": "mdx-deck"
+    "help": "mdx-deck",
+    "server": "nodemon server.js",
+    "docker:build:hello": "docker build -t helloworld/envoy -f ./.docker/envoyHelloWorld.Dockerfile ./.docker",
+    "docker:run:hello": "docker run -d -p 8081:8081 --network=host helloworld/envoy",
+    "docker:build:transaction": "docker build -t transaction/envoy -f ./.docker/envoyTransaction.Dockerfile ./.docker",
+    "docker:run:transaction": "docker run -d -p 8082:8082 --network=host transaction/envoy"
   },
   "keywords": [],
   "author": "Brent Jackson",
@@ -22,12 +27,13 @@
   },
   "name": "meetup",
   "dependencies": {
+    "@grpc/proto-loader": "^0.3.0",
     "@pismo/bolt-button": "^0.4.0",
     "@pismo/bolt-core": "^0.4.0",
-    "@grpc/proto-loader": "^0.3.0",
     "google-protobuf": "^3.7.0-rc.2",
-    "grpc-web": "^1.0.3",
     "grpc": "^1.15.0",
-    "polished": "^2.3.3"
+    "grpc-web": "^1.0.3",
+    "polished": "^2.3.3",
+    "recharts": "^1.4.3"
   }
 }

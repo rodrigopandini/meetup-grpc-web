@@ -17,7 +17,7 @@ var helloworld = protoDescriptor.helloworld;
 
 function doSayHello(call, callback) {
   callback(null, {
-    message: 'Helloooo! ' + call.request.name
+    message: 'Hello! ' + call.request.name
   });
 }
 
@@ -33,7 +33,7 @@ if (require.main === module) {
   var server = getServer();
   server.bind('0.0.0.0:9090', grpc.ServerCredentials.createInsecure());
   server.start();
-  console.log('grpc-server running on port: 9090')
+  console.log('[NODE] grpc-server running on 0.0.0.0:9090')
 }
 
 exports.getServer = getServer;
