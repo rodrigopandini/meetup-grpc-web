@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:sa-east-1:270036487593:certificate/5a4c6a94-050d-4fb8-a940-6251c4992120
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+  labels:
+    app: envoy
+  name: envoy
+  namespace: meetup-grpc
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: tcp-envoy
+    port: 8082
+    protocol: TCP
+    targetPort: 8082
+  selector:
+    app: envoy
+  sessionAffinity: None
+  type: LoadBalancer
